@@ -34,7 +34,7 @@ function apagarTodosLosAudios() {
 
 botonEncender.addEventListener("click", () => {
   if (!audioEncender) {
-    audioEncender = new Audio("onRalenti.wav");
+    audioEncender = new Audio("public/onRalenti.wav");
     audioEncender.loop = true;
   }
 
