@@ -56,6 +56,8 @@ botonEncender.addEventListener("click", () => {
   } else {
     apagarTodosLosAudios();
     audioEncender.play();
+    audioEncender.preload = "auto";
+
     botonEncender.classList.remove("bg-red-500");
     botonEncender.classList.add("bg-green-500");
     botonLanzada.classList.add("bg-blue-200");
@@ -91,7 +93,7 @@ botonAcelerar.addEventListener("click", () => {
       audioAcelerar1 = new Audio("public/gasSound.wav");
     }
     if (!audioAcelerar2) {
-      audioAcelerar2 = new Audio("public/brakeSound.wav");
+      audioAcelerar2 = new Audio("public/brakeSound2.wav");
     }
 
     if (isAcelerando) {
