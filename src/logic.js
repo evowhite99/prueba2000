@@ -1,43 +1,36 @@
+let audioEncender = new Audio("public/onRalenti.wav");
+let audioAcelerar1 = new Audio("public/gasSound.wav");
+let audioAcelerar2 = new Audio("public/brakeSound2.wav");
+let audioLanzada = new Audio("public/gasFirstSound.wav");
+
+document.addEventListener("DOMContentLoaded", () => {
+  [audioEncender, audioAcelerar1, audioAcelerar2, audioLanzada].forEach(
+    (audio) => {
+      audio.preload = "auto";
+      audio.load();
+    }
+  );
+});
+
 const botonEncender = document.getElementById("encendido");
 const botonAcelerar = document.getElementById("acelerar");
 const botonLanzada = document.getElementById("lanzada");
 
-let audioEncender;
-let audioAcelerar1;
-let audioAcelerar2;
-let audioLanzada;
 let count = 0;
-
 let isEncendido = false;
 let isLanzada = false;
 let isAcelerando = false;
 
-// Apagar todos los audios
 function apagarTodosLosAudios() {
-  if (audioEncender) {
-    audioEncender.pause();
-    audioEncender.currentTime = 0;
-  }
-  if (audioAcelerar1) {
-    audioAcelerar1.pause();
-    audioAcelerar1.currentTime = 0;
-  }
-  if (audioAcelerar2) {
-    audioAcelerar2.pause();
-    audioAcelerar2.currentTime = 0;
-  }
-  if (audioLanzada) {
-    audioLanzada.pause();
-    audioLanzada.currentTime = 0;
-  }
+  [audioEncender, audioAcelerar1, audioAcelerar2, audioLanzada].forEach(
+    (audio) => {
+      audio.pause();
+      audio.currentTime = 0;
+    }
+  );
 }
 
 botonEncender.addEventListener("click", () => {
-  if (!audioEncender) {
-    audioEncender = new Audio("public/onRalenti.wav");
-    audioEncender.loop = true;
-  }
-
   if (isEncendido) {
     apagarTodosLosAudios();
     isAcelerando = false;
@@ -56,7 +49,6 @@ botonEncender.addEventListener("click", () => {
   } else {
     apagarTodosLosAudios();
     audioEncender.play();
-    audioEncender.preload = "auto";
 
     botonEncender.classList.remove("bg-red-500");
     botonEncender.classList.add("bg-green-500");
@@ -68,13 +60,8 @@ botonEncender.addEventListener("click", () => {
 
 botonLanzada.addEventListener("click", () => {
   if (isEncendido) {
-    if (!audioLanzada) {
-      audioLanzada = new Audio("public/gasFirstSound.wav");
-    }
-
     if (!isLanzada) {
       botonAcelerar.classList.remove("bg-black");
-
       botonAcelerar.classList.add("bg-blue-600");
       apagarTodosLosAudios();
       audioLanzada.play();
@@ -88,14 +75,7 @@ botonLanzada.addEventListener("click", () => {
 });
 
 botonAcelerar.addEventListener("click", () => {
-  if (isEncendido && count == 1) {
-    if (!audioAcelerar1) {
-      audioAcelerar1 = new Audio("public/gasSound.wav");
-    }
-    if (!audioAcelerar2) {
-      audioAcelerar2 = new Audio("public/brakeSound2.wav");
-    }
-
+  if (isEncendido && count === 1) {
     if (isAcelerando) {
       botonAcelerar.classList.remove("bg-blue-600");
       botonAcelerar.classList.add("bg-orange-500");
